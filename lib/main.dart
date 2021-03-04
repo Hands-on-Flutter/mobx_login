@@ -27,12 +27,13 @@ class MyApp extends StatelessWidget {
 class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    countriesStore.fetchCountries();
-
     return Scaffold(
       body: SafeArea(
-        child: Center(
-          child: Observer(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Observer(
               builder: (_) {
                 if (null != countriesStore.fetchCountryFuture) {
                   switch(countriesStore.fetchCountryFuture.status) {
@@ -47,8 +48,21 @@ class MyHomePage extends StatelessWidget {
 
                 return Text('No status yet');
               },
-          ),
-        ),
+            ),
+            Observer(
+              builder: (_) => countriesStore.hasLogedin
+                ? Text('Has logedin')
+                : Text('Not logedin yet')
+            ),
+            Observer(
+                builder: (_) => Text('Token: ${countriesStore.loginToken}'),
+            ),
+            ElevatedButton(
+              onPressed: countriesStore.fetchCountries,
+              child: Text('Login'),
+            ),
+          ],
+        )
       ),
     );
   }

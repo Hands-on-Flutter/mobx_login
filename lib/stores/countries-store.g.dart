@@ -40,6 +40,36 @@ mixin _$CountriesStore on _CountriesStore, Store {
     });
   }
 
+  final _$hasLogedinAtom = Atom(name: '_CountriesStore.hasLogedin');
+
+  @override
+  bool get hasLogedin {
+    _$hasLogedinAtom.reportRead();
+    return super.hasLogedin;
+  }
+
+  @override
+  set hasLogedin(bool value) {
+    _$hasLogedinAtom.reportWrite(value, super.hasLogedin, () {
+      super.hasLogedin = value;
+    });
+  }
+
+  final _$loginTokenAtom = Atom(name: '_CountriesStore.loginToken');
+
+  @override
+  String get loginToken {
+    _$loginTokenAtom.reportRead();
+    return super.loginToken;
+  }
+
+  @override
+  set loginToken(String value) {
+    _$loginTokenAtom.reportWrite(value, super.loginToken, () {
+      super.loginToken = value;
+    });
+  }
+
   final _$fetchCountriesAsyncAction =
       AsyncAction('_CountriesStore.fetchCountries');
 
@@ -52,7 +82,9 @@ mixin _$CountriesStore on _CountriesStore, Store {
   String toString() {
     return '''
 fetchCountryFuture: ${fetchCountryFuture},
-countries: ${countries}
+countries: ${countries},
+hasLogedin: ${hasLogedin},
+loginToken: ${loginToken}
     ''';
   }
 }

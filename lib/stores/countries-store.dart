@@ -14,6 +14,10 @@ abstract class _CountriesStore with Store {
   ObservableFuture<Countries> fetchCountryFuture;
   @observable
   Countries countries;
+  @observable
+  bool hasLogedin = false;
+  @observable
+  String loginToken = '';
 
   @action
   Future<void> fetchCountries() async {
@@ -21,5 +25,7 @@ abstract class _CountriesStore with Store {
 
     fetchCountryFuture = ObservableFuture(countriesRepo.getCountries());
     countries = await fetchCountryFuture;
+    hasLogedin = true;
+    loginToken = 'token-from-login';
   }
 }
